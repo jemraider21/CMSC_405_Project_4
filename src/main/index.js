@@ -80,7 +80,7 @@ function main() {
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
-  const buffers = cubeInitBuffers(gl, ShapePositions.TERRY.position);
+  const buffers = cubeInitBuffers(gl, ShapePositions.BERRY.position);
 
   let then = 0;
 
