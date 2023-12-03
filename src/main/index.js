@@ -1,5 +1,6 @@
 import { cubeInitBuffers } from "./utils/CubeInitBuffers.js";
 import { drawScene } from "./draw-scene.js";
+import { ShapePositions } from "./shapes/ShapePositions.js";
 
 let cubeRotation = 0.0;
 let deltaTime = 0;
@@ -79,7 +80,7 @@ function main() {
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
-  const buffers = cubeInitBuffers(gl);
+  const buffers = cubeInitBuffers(gl, ShapePositions.TERRY.position);
 
   let then = 0;
 

@@ -1,5 +1,5 @@
-function cubeInitBuffers(gl) {
-    const positionBuffer = initPositionBuffer(gl);
+function cubeInitBuffers(gl, positions) {
+    const positionBuffer = initPositionBuffer(gl, positions);
   
     const colorBuffer = initColorBuffer(gl);
   
@@ -12,33 +12,13 @@ function cubeInitBuffers(gl) {
     };
   }
   
-  function initPositionBuffer(gl) {
+  function initPositionBuffer(gl, positions) {
     // Create a buffer for the square's positions.
     const positionBuffer = gl.createBuffer();
   
     // Select the positionBuffer as the one to apply buffer
     // operations to from here out.
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-  
-    const positions = [
-      // Front face
-      -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
-  
-      // Back face
-      -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, -1.0,
-  
-      // Top face
-      -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0,
-  
-      // Bottom face
-      -1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, -1.0, -1.0, 1.0,
-  
-      // Right face
-      1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0,
-  
-      // Left face
-      -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, -1.0,
-    ];
   
     // Now pass the list of positions into WebGL to build the
     // shape. We do this by creating a Float32Array from the

@@ -7,6 +7,7 @@ System Requirements:
 1. Node.js
 
 To run the program:
-1. Run `node server.js` in the terminal
-2. In the web browser, go to http://localhost:3000
-3. To terminate the program, press `ctrl+c` om the terminal
+1. Run `npm install` in the terminal to install the node dependencies
+2. Run `node server.js` in the terminal
+3. In the web browser, go to http://localhost:3000
+4. To terminate the program, press `ctrl+c` om the terminal
