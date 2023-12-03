@@ -1,4 +1,4 @@
-import { initBuffers } from "./init-buffers.js";
+import { cubeInitBuffers } from "./utils/CubeInitBuffers.js";
 import { drawScene } from "./draw-scene.js";
 
 let cubeRotation = 0.0;
@@ -79,7 +79,7 @@ function main() {
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
-  const buffers = initBuffers(gl);
+  const buffers = cubeInitBuffers(gl);
 
   let then = 0;
 
