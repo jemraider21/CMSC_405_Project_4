@@ -1,18 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>WebGL Demo</title>
-    <script
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
       integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
       crossorigin="anonymous"
       defer
-    ></script>
-    <script src="index.js" type="module"></script>
-  </head>
-
-  <body>
+    ></script> -->
+</head>
+<body>
+    <h1>Hello from Typescript Frontend</h1>
     <canvas id="glcanvas" width="1700" height="720"></canvas>
-  </body>
+    <script>var exports = {};</script>
+    <script data-main="./js/frontend/index.js" src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script type="module" src="./js/frontend/index.js"></script>
+</body>
 </html>

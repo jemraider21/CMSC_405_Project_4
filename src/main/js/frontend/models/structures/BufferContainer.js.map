@@ -1,0 +1,1 @@
+{"version":3,"file":"BufferContainer.js","sourceRoot":"","sources":["../../../../ts/frontend/models/structures/BufferContainer.ts"],"names":[],"mappings":";;;AAAA,MAAa,eAAe;IAKxB,YAAY,cAA2B,EAAE,WAAwB,EAAE,WAAwB;QACvF,IAAI,CAAC,cAAc,GAAG,cAAc,CAAC;QACrC,IAAI,CAAC,WAAW,GAAG,WAAW,CAAC;QAC/B,IAAI,CAAC,WAAW,GAAG,WAAW,CAAC;IACnC,CAAC;CACJ;AAVD,0CAUC"}
