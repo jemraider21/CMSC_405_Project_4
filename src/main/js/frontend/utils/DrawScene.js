@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.drawScene = void 0;
-const gl_matrix_1 = require("gl-matrix");
-function drawScene(gl, programInfo, buffers, cubeRotation, canvasWidth, canvasHeight) {
+import { mat4 } from "gl-matrix";
+export function drawScene(gl, programInfo, buffers, cubeRotation, canvasWidth, canvasHeight) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
     gl.clearDepth(1.0); // Clear everything
     gl.enable(gl.DEPTH_TEST); // Enable depth testing
@@ -19,27 +16,27 @@ function drawScene(gl, programInfo, buffers, cubeRotation, canvasWidth, canvasHe
     const aspect = canvasWidth / canvasHeight;
     const zNear = 0.1;
     const zFar = 100.0;
-    const projectionMatrix = gl_matrix_1.mat4.create();
+    const projectionMatrix = mat4.create();
     // note: glmatrix.js always has the first argument
     // as the destination to receive the result.
-    gl_matrix_1.mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+    mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
     // Set the drawing position to the "identity" point, which is
     // the center of the scene.
-    const modelViewMatrix = gl_matrix_1.mat4.create();
+    const modelViewMatrix = mat4.create();
     // Now move the drawing position a bit to where we want to
     // start drawing the square.
-    gl_matrix_1.mat4.translate(modelViewMatrix, // destination matrix
+    mat4.translate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to translate
     [-0.0, 0.0, -6.0]); // amount to translate
-    gl_matrix_1.mat4.rotate(modelViewMatrix, // destination matrix
+    mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     cubeRotation, // amount to rotate in radians
     [0, 0, 1]); // axis to rotate around (Z)
-    gl_matrix_1.mat4.rotate(modelViewMatrix, // destination matrix
+    mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     cubeRotation * 0.7, // amount to rotate in radians
     [0, 1, 0]); // axis to rotate around (Y)
-    gl_matrix_1.mat4.rotate(modelViewMatrix, // destination matrix
+    mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     cubeRotation * 0.3, // amount to rotate in radians
     [1, 0, 0]); // axis to rotate around (X)
@@ -61,7 +58,6 @@ function drawScene(gl, programInfo, buffers, cubeRotation, canvasWidth, canvasHe
         gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
     }
 }
-exports.drawScene = drawScene;
 function setPositionAttribute(gl, buffers, programInfo) {
     const numComponents = 3;
     const type = gl.FLOAT; // the data in the buffer is 32bit floats

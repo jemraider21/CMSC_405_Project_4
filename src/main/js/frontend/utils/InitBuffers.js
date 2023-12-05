@@ -1,14 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.initBuffers = void 0;
-const BufferContainer_1 = require("../models/structures/BufferContainer");
-function initBuffers(gl, positions) {
+import { BufferContainer } from "../models/structures/BufferContainer";
+export function initBuffers(gl, positions) {
     const positionBuffer = initPositionBuffer(gl, positions);
     const colorBuffer = initColorBuffer(gl);
     const indexBuffer = initIndexBuffer(gl);
-    return new BufferContainer_1.BufferContainer(positionBuffer, colorBuffer, indexBuffer);
+    return new BufferContainer(positionBuffer, colorBuffer, indexBuffer);
 }
-exports.initBuffers = initBuffers;
 function initPositionBuffer(gl, positions) {
     // Create a buffer for the square's positions.
     const positionBuffer = gl.createBuffer();

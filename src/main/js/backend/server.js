@@ -1,16 +1,17 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const path_1 = __importDefault(require("path"));
-const app = (0, express_1.default)();
+import express from 'express';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const app = express();
 const port = 3000;
-const rootDirPath = "../../";
-app.use(express_1.default.static(path_1.default.join(__dirname, rootDirPath)));
+const __dirname = dirname(fileURLToPath(import.meta.url));
+console.log(__dirname);
+const rootDirPath = path.join(__dirname, "../../");
+console.log(`Root path: ${rootDirPath}`);
+app.use(express.static(rootDirPath));
+const indexFilePath = path.join(rootDirPath, "index.html");
+console.log(`Index file path: ${indexFilePath}`);
 app.get('/', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, rootDirPath + "index.html"));
+    res.sendFile(indexFilePath);
 });
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

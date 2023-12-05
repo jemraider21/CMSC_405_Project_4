@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ShapePositions_1 = require("./models/shapes/ShapePositions");
-const ProgramInfo_1 = require("./models/structures/ProgramInfo");
-const InitBuffers_1 = require("./utils/InitBuffers");
-const DrawScene_1 = require("./utils/DrawScene");
+import { ShapePositionEnum } from "./models/shapes/ShapePositions";
+import { ProgramInfo } from "./models/structures/ProgramInfo";
+import { initBuffers } from "./utils/InitBuffers";
+import { drawScene } from "./utils/DrawScene";
 alert("Script is working");
 let cubeRotation = 0.0;
 let deltaTime = 0;
@@ -43,17 +41,17 @@ function main() {
     // Initialize a shader program; this is where all the lighting
     // for the vertices and so forth is established.
     const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
-    const programInfo = new ProgramInfo_1.ProgramInfo(gl, shaderProgram);
+    const programInfo = new ProgramInfo(gl, shaderProgram);
     // Here's where we call the routine that builds all the
     // objects we'll be drawing.
-    const buffers = (0, InitBuffers_1.initBuffers)(gl, ShapePositions_1.ShapePositionEnum.PERFECT_CUBE.position);
+    const buffers = initBuffers(gl, ShapePositionEnum.PERFECT_CUBE.position);
     // Draw the scene repeatedly
     let then = 0;
     function render(now) {
         now *= 0.001; // convert to seconds
         deltaTime = now - then;
         then = now;
-        (0, DrawScene_1.drawScene)(gl, programInfo, buffers, cubeRotation, canvas.width, canvas.height);
+        drawScene(gl, programInfo, buffers, cubeRotation, canvas.width, canvas.height);
         cubeRotation += deltaTime;
         requestAnimationFrame(render);
     }

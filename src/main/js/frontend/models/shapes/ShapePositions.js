@@ -1,13 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShapePositionEnum = exports.ShapePositions = void 0;
-class ShapePositions {
+export class ShapePositions {
     constructor(position) {
         this.position = position;
     }
 }
-exports.ShapePositions = ShapePositions;
-exports.ShapePositionEnum = {
+export const ShapePositionEnum = {
     PERFECT_CUBE: new ShapePositions([
         -1.0, -1.0, +1.0, +1.0, -1.0, +1.0, +1.0, +1.0, +1.0, -1.0, +1.0, +1.0, // Front face
         -1.0, -1.0, -1.0, -1.0, +1.0, -1.0, +1.0, +1.0, -1.0, +1.0, -1.0, -1.0, // Back face
