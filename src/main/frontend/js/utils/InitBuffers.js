@@ -1,4 +1,4 @@
-import { BufferContainer } from "../models/structures/BufferContainer";
+import { BufferContainer } from "../models/structures/BufferContainer.js";
 export function initBuffers(gl, positions) {
     const positionBuffer = initPositionBuffer(gl, positions);
     const colorBuffer = initColorBuffer(gl);

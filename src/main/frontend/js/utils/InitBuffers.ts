@@ -1,4 +1,4 @@
-import { BufferContainer } from "../models/structures/BufferContainer";
+import { BufferContainer } from "../models/structures/BufferContainer.js";
 
 export function initBuffers(gl: WebGLRenderingContext, positions: number[]) {
     const positionBuffer: WebGLBuffer = initPositionBuffer(gl, positions);

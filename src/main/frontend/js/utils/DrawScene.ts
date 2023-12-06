@@ -1,6 +1,6 @@
 import { mat4 } from "gl-matrix";
-import { BufferContainer } from "../models/structures/BufferContainer";
-import { ProgramInfo } from "../models/structures/ProgramInfo";
+import { BufferContainer } from "../models/structures/BufferContainer.js";
+import { ProgramInfo } from "../models/structures/ProgramInfo.js";
 
 export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, buffers: BufferContainer, cubeRotation: number, canvasWidth: number, canvasHeight: number) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
