@@ -1,5 +1,6 @@
 import { FaceColorEnum } from './../models/shapes/FaceColors.js';
 import { BufferContainer } from "../models/structures/BufferContainer.js";
+import { FaceIndicesEnum } from '../models/shapes/FaceIndices.js';
 
 export function initBuffers(gl: WebGLRenderingContext, positions: number[]) {
     const positionBuffer: WebGLBuffer = initPositionBuffer(gl, positions);
@@ -50,14 +51,13 @@ function initIndexBuffer(gl: WebGLRenderingContext): WebGLBuffer {
     // This array defines each face as two triangles, using the
     // indices into the vertex array to specify each triangle's
     // position.
-    const indices: number[] = [
-        0, 1, 2, 0, 2, 3,    // front
-        4, 5, 6, 4, 6, 7,    // back
-        8, 9, 10, 8, 10, 11,    // top
-        12, 13, 14, 12, 14, 15,    // bottom
-        16, 17, 18, 16, 18, 19,    // right
-        20, 21, 22, 20, 22, 23,    // left
-    ];
+    const indices = FaceIndicesEnum.FRONT.concat([
+        FaceIndicesEnum.BACK,
+        FaceIndicesEnum.TOP,
+        FaceIndicesEnum.BOTTOM,
+        FaceIndicesEnum.RIGHT,
+        FaceIndicesEnum.LEFT
+    ]);
 
     const indexBuffer: WebGLBuffer = gl.createBuffer() as WebGLBuffer;
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
