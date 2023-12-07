@@ -1,0 +1,7 @@
+{
+    "watch": ["src"],
+    "ext": "ts,html",
+    "ignore": ["src/**/*.spec.ts"],
+    "exec": "npm run build && npx webpack && node ./src/main/backend/server.js"
+  }
+  
