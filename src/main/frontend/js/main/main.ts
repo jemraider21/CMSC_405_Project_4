@@ -1,8 +1,8 @@
-import { ShapePositionEnum } from "./models/shapes/ShapePositions.js";
-import { BufferContainer } from "./models/structures/BufferContainer.js";
-import { ProgramInfo } from "./models/structures/ProgramInfo.js";
-import { initBuffers } from "./utils/InitBuffers.js";
-import { drawScene } from "./utils/DrawScene.js";
+import { ShapePositionEnum } from "../models/shapes/positions/ShapePositions.js";
+import { BufferContainer } from "../models/structures/buffercontainer/BufferContainer.js";
+import { ProgramInfo } from "../models/structures/programinfo/ProgramInfo.js";
+import { initBuffers } from "../utils/initbuffers/InitBuffers.js";
+import { drawScene } from "../utils/drawscene/DrawScene.js";
 
 alert("Script is working");
 
