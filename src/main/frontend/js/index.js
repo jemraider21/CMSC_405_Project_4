@@ -7,7 +7,7 @@ let cubeRotation = 0.0;
 let deltaTime = 0;
 main();
 function main() {
-    const canvas = document.getElementById("glCanvas");
+    const canvas = document.getElementById("glcanvas");
     const gl = canvas.getContext("webgl");
     if (gl === null) {
         alert("Unable to initialize WebGL. Your browser or machine may not support it.");

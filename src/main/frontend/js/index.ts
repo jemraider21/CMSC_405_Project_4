@@ -12,7 +12,7 @@ let deltaTime: number = 0;
 main();
 
 function main(){
-    const canvas: HTMLCanvasElement = document.getElementById("glCanvas") as HTMLCanvasElement;
+    const canvas: HTMLCanvasElement = document.getElementById("glcanvas") as HTMLCanvasElement;
     const gl: WebGLRenderingContext = canvas.getContext("webgl") as WebGLRenderingContext;
     if(gl === null){
         alert("Unable to initialize WebGL. Your browser or machine may not support it.");
