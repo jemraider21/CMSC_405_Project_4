@@ -13,6 +13,6 @@ app.get('/', (req, res) => {
     res.sendFile(indexFilePath);
 });
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log("\x1b[33m", `Server running at http://localhost:${port}`);
     console.log(`Press Ctrl+C to quit.`);
 });

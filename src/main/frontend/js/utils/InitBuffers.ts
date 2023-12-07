@@ -1,3 +1,4 @@
+import { FaceColorEnum } from './../models/shapes/FaceColors.js';
 import { BufferContainer } from "../models/structures/BufferContainer.js";
 
 export function initBuffers(gl: WebGLRenderingContext, positions: number[]) {
@@ -23,13 +24,13 @@ function initPositionBuffer(gl: WebGLRenderingContext, positions: number[]): Web
 }
 
 function initColorBuffer(gl: WebGLRenderingContext): WebGLBuffer {
-    const faceColors: number[] = [
-        1.0, 1.0, 1.0, 1.0,    // Front face: white
-        1.0, 0.0, 0.0, 1.0,    // Back face: red
-        0.0, 1.0, 0.0, 1.0,    // Top face: green
-        0.0, 0.0, 1.0, 1.0,    // Bottom face: blue
-        1.0, 1.0, 0.0, 1.0,    // Right face: yellow
-        1.0, 0.0, 1.0, 1.0,    // Left face: purple
+    const faceColors: number[][] = [
+        FaceColorEnum.WHITE.color,
+        FaceColorEnum.RED.color,
+        FaceColorEnum.GREEN.color,
+        FaceColorEnum.BLUE.color,
+        FaceColorEnum.YELLOW.color,
+        FaceColorEnum.PURPLE.color
     ];
 
     // Convert the array of colors into a table for all the vertices.

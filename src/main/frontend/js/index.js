@@ -51,7 +51,7 @@ function main() {
         now *= 0.001; // convert to seconds
         deltaTime = now - then;
         then = now;
-        drawScene(gl, programInfo, buffers, cubeRotation, canvas.width, canvas.height);
+        drawScene(gl, programInfo, buffers, cubeRotation);
         cubeRotation += deltaTime;
         requestAnimationFrame(render);
     }

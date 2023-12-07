@@ -3,8 +3,6 @@
 Supported Systems:
 * All systems that have Node.js installed can run the program
 
-Current Issue: https://github.com/jemraider21/CMSC_405_Project_4/issues/1
-
 System Requirements:
 1. Node.js
 2. Typescript is installed globally (`npm install -g typescript`)

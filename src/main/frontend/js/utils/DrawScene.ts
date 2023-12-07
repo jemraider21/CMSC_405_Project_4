@@ -2,7 +2,7 @@ import { mat4 } from "gl-matrix";
 import { BufferContainer } from "../models/structures/BufferContainer.js";
 import { ProgramInfo } from "../models/structures/ProgramInfo.js";
 
-export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, buffers: BufferContainer, cubeRotation: number, canvasWidth: number, canvasHeight: number) {
+export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, buffers: BufferContainer, cubeRotation: number) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
     gl.clearDepth(1.0); // Clear everything
     gl.enable(gl.DEPTH_TEST); // Enable depth testing
@@ -18,7 +18,7 @@ export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, b
     // and we only want to see objects between 0.1 units
     // and 100 units away from the camera.
     const fieldOfView: number = (45 * Math.PI) / 180; // in radians
-    const aspect: number = canvasWidth/ canvasHeight;
+    const aspect: number = gl.canvas.width/ gl.canvas.height;
     const zNear: number = 0.1;
     const zFar: number = 100.0;
     const projectionMatrix: mat4 = mat4.create();
