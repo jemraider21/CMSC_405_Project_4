@@ -3,6 +3,7 @@ import { BufferContainer } from "../models/structures/buffercontainer/BufferCont
 import { ProgramInfo } from "../models/structures/programinfo/ProgramInfo.js";
 import { initBuffers } from "../utils/initbuffers/InitBuffers.js";
 import { drawScene } from "../utils/drawscene/DrawScene.js";
+import { ShaderProgramEnum } from "../utils/shaders/ShaderProgram.js";
 
 alert("Script is working");
 
@@ -22,34 +23,10 @@ function main(){
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
     gl.clearDepth(gl.COLOR_BUFFER_BIT); // Clear the color buffer with specified clear color
 
-    // Vertex shader program
-    const vsSource: string = `
-    attribute vec4 aVertexPosition;
-    attribute vec4 aVertexColor;
-
-    uniform mat4 uModelViewMatrix;
-    uniform mat4 uProjectionMatrix;
-
-    varying lowp vec4 vColor;
-
-    void main(void) {
-      gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
-      vColor = aVertexColor;
-    }
-  `;
-
-  // Fragment shader program
-  const fsSource: string = `
-    varying lowp vec4 vColor;
-
-    void main(void) {
-      gl_FragColor = vColor;
-    }
-  `;
 
   // Initialize a shader program; this is where all the lighting
   // for the vertices and so forth is established.
-  const shaderProgram: WebGLProgram = initShaderProgram(gl, vsSource, fsSource);
+  const shaderProgram: WebGLProgram = initShaderProgram(gl);
   const programInfo: ProgramInfo = new ProgramInfo(gl, shaderProgram);
 
   // Here's where we call the routine that builds all the
@@ -74,9 +51,9 @@ function main(){
 //
 // Initialize a shader program, so WebGL knows how to draw our data
 //
-function initShaderProgram(gl: WebGLRenderingContext, vsSource: string, fsSource: string): WebGLProgram {
-    const vertexShader: WebGLShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fragmentShader: WebGLShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+function initShaderProgram(gl: WebGLRenderingContext): WebGLProgram {
+    const vertexShader: WebGLShader = loadShader(gl, gl.VERTEX_SHADER, ShaderProgramEnum.VERTEX.program);
+    const fragmentShader: WebGLShader = loadShader(gl, gl.FRAGMENT_SHADER, ShaderProgramEnum.FRAGMENT.program);
 
     // Create the shader program
     const shaderProgram: WebGLProgram = gl.createProgram() as WebGLProgram;
