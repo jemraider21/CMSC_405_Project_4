@@ -1,8 +1,9 @@
 import { mat4 } from "gl-matrix";
 import { BufferContainer } from "../../models/structures/buffercontainer/BufferContainer.js";
 import { ProgramInfo } from "../../models/structures/programinfo/ProgramInfo.js";
+import { ShapeContext } from "../../models/shapes/context/ShapeContext.js";
 
-export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, buffers: BufferContainer, cubeRotation: number) {
+export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, shapeContexts: ShapeContext[], cubeRotation: number) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
     gl.clearDepth(1.0); // Clear everything
     gl.enable(gl.DEPTH_TEST); // Enable depth testing
@@ -31,12 +32,16 @@ export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, b
     // the center of the scene.
     const modelViewMatrix: mat4 = mat4.create();
 
+    shapeContexts.forEach((shapeContext: ShapeContext) => drawShape(gl, programInfo, modelViewMatrix, projectionMatrix, shapeContext, cubeRotation));  
+}
+
+function drawShape(gl: WebGLRenderingContext, programInfo: ProgramInfo, modelViewMatrix: mat4, projectionMatrix: mat4, shapeContext: ShapeContext, cubeRotation: number){
     // Now move the drawing position a bit to where we want to
     // start drawing the square.
     mat4.translate(
         modelViewMatrix, // destination matrix
         modelViewMatrix, // matrix to translate
-        [-0.0, 0.0, -6.0]
+        shapeContext.vertex.vertex
     ); // amount to translate
     
     mat4.rotate(
@@ -62,15 +67,15 @@ export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, b
 
     // Tell WebGL how to pull out the positions from the position
     // buffer into the vertexPosition attribute.
-    setPositionAttribute(gl, buffers, programInfo);
-    setColorAttribute(gl, buffers, programInfo);
+    setPositionAttribute(gl, shapeContext.buffers, programInfo);
+    setColorAttribute(gl, shapeContext.buffers, programInfo);
 
     // Tell WebGL which indices to use to index the vertices
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indexBuffer);
-  
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shapeContext.buffers.indexBuffer);
+
     // Tell WebGL to use our program when drawing
     gl.useProgram(programInfo.program);
-  
+
     // Set the shader uniforms
     gl.uniformMatrix4fv(
       programInfo.uniformLocations.projectionMatrix,
@@ -82,7 +87,7 @@ export function drawScene(gl: WebGLRenderingContext, programInfo: ProgramInfo, b
       false,
       modelViewMatrix
     );
-  
+
     {
       const vertexCount = 36;
       const type = gl.UNSIGNED_SHORT;

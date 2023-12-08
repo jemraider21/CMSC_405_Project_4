@@ -1,8 +1,9 @@
-import { ShapePositionEnum } from "../models/shapes/positions/ShapePositions.js";
-import { BufferContainer } from "../models/structures/buffercontainer/BufferContainer.js";
+import { ShapePositionEnum, ShapePositions } from "../models/shapes/positions/ShapePositions.js";
 import { ProgramInfo } from "../models/structures/programinfo/ProgramInfo.js";
 import { initBuffers } from "../utils/initbuffers/InitBuffers.js";
 import { drawScene } from "../utils/drawscene/DrawScene.js";
+import { ShapeContext } from "../models/shapes/context/ShapeContext.js";
+import { getRandomTranslationVertex } from "../models/shapes/translationvertex/TranslationVertex.js";
 
 alert("Script is working");
 
@@ -29,7 +30,10 @@ function main(){
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
-  const buffers: BufferContainer = initBuffers(gl, ShapePositionEnum.PERFECT_CUBE.position);
+
+    const shapeContexts: ShapeContext[] = Object.values(ShapePositionEnum).map((shapePosition: ShapePositions) => {
+        return new ShapeContext(initBuffers(gl, shapePosition.position), getRandomTranslationVertex());
+    });
 
   // Draw the scene repeatedly
   let then: number = 0;
@@ -38,8 +42,8 @@ function main(){
       deltaTime = now - then;
       then = now;
 
-      drawScene(gl, programInfo, buffers, cubeRotation);
-      cubeRotation += deltaTime;
+      drawScene(gl, programInfo, shapeContexts, cubeRotation);
+      cubeRotation -= deltaTime;
 
       requestAnimationFrame(render);
   }
