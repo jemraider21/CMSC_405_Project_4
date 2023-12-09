@@ -47,21 +47,21 @@ function drawShape(gl: WebGLRenderingContext, programInfo: ProgramInfo, modelVie
     mat4.rotate(
         modelViewMatrix, // destination matrix
         modelViewMatrix, // matrix to rotate
-        cubeRotation, // amount to rotate in radians
+        cubeRotation * 0.75, // amount to rotate in radians
         [0, 0, 1]
     ); // axis to rotate around (Z)
 
     mat4.rotate(
         modelViewMatrix, // destination matrix
         modelViewMatrix, // matrix to rotate
-        cubeRotation * 0.7, // amount to rotate in radians
+        cubeRotation * 0, // amount to rotate in radians
         [0, 1, 0]
     ); // axis to rotate around (Y)
 
     mat4.rotate(
         modelViewMatrix, // destination matrix
         modelViewMatrix, // matrix to rotate
-        cubeRotation * 0.3, // amount to rotate in radians
+        cubeRotation * 0.03, // amount to rotate in radians
         [1, 0, 0]
     ); // axis to rotate around (X)
 
