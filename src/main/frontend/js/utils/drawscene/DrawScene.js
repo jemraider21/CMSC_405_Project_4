@@ -1,5 +1,5 @@
 import { mat4 } from "gl-matrix";
-export function drawScene(gl, programInfo, buffers, cubeRotation) {
+export function drawScene(gl, programInfo, shapeContexts, cubeRotation) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
     gl.clearDepth(1.0); // Clear everything
     gl.enable(gl.DEPTH_TEST); // Enable depth testing
@@ -23,29 +23,32 @@ export function drawScene(gl, programInfo, buffers, cubeRotation) {
     // Set the drawing position to the "identity" point, which is
     // the center of the scene.
     const modelViewMatrix = mat4.create();
+    shapeContexts.forEach((shapeContext) => drawShape(gl, programInfo, modelViewMatrix, projectionMatrix, shapeContext, cubeRotation));
+}
+function drawShape(gl, programInfo, modelViewMatrix, projectionMatrix, shapeContext, cubeRotation) {
     // Now move the drawing position a bit to where we want to
     // start drawing the square.
     mat4.translate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to translate
-    [-0.0, 0.0, -6.0]); // amount to translate
+    shapeContext.vertex.vertex); // amount to translate
     mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
-    cubeRotation, // amount to rotate in radians
+    cubeRotation * 0.75, // amount to rotate in radians
     [0, 0, 1]); // axis to rotate around (Z)
     mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
-    cubeRotation * 0.7, // amount to rotate in radians
+    cubeRotation * 0, // amount to rotate in radians
     [0, 1, 0]); // axis to rotate around (Y)
     mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
-    cubeRotation * 0.3, // amount to rotate in radians
+    cubeRotation * 0.03, // amount to rotate in radians
     [1, 0, 0]); // axis to rotate around (X)
     // Tell WebGL how to pull out the positions from the position
     // buffer into the vertexPosition attribute.
-    setPositionAttribute(gl, buffers, programInfo);
-    setColorAttribute(gl, buffers, programInfo);
+    setPositionAttribute(gl, shapeContext.buffers, programInfo);
+    setColorAttribute(gl, shapeContext.buffers, programInfo);
     // Tell WebGL which indices to use to index the vertices
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indexBuffer);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shapeContext.buffers.indexBuffer);
     // Tell WebGL to use our program when drawing
     gl.useProgram(programInfo.program);
     // Set the shader uniforms

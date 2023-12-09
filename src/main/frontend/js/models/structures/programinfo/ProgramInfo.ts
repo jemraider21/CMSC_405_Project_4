@@ -1,3 +1,4 @@
+import { ShaderProgramEnum } from "../../../utils/shaders/ShaderProgram.js";
 
 class UniformLocations{
    projectionMatrix: WebGLUniformLocation | null;
@@ -27,9 +28,54 @@ export class ProgramInfo{
     attributeLocations: AttributeLocations;
     uniformLocations: UniformLocations;
 
-    constructor(gl: WebGLRenderingContext, program: WebGLProgram){
-        this.program = program;
-        this.attributeLocations = new AttributeLocations(gl, program);
-        this.uniformLocations = new UniformLocations(gl, program);
+    constructor(gl: WebGLRenderingContext){
+        this.program = this.#initShaderProgram(gl);
+        this.attributeLocations = new AttributeLocations(gl, this.program);
+        this.uniformLocations = new UniformLocations(gl, this.program);
+    }
+
+    //
+    // Initialize a shader program, so WebGL knows how to draw our data
+    //
+    #initShaderProgram(gl: WebGLRenderingContext): WebGLProgram {
+        const vertexShader: WebGLShader = this.#loadShader(gl, gl.VERTEX_SHADER, ShaderProgramEnum.VERTEX.program);
+        const fragmentShader: WebGLShader = this.#loadShader(gl, gl.FRAGMENT_SHADER, ShaderProgramEnum.FRAGMENT.program);
+
+        // Create the shader program
+        const shaderProgram: WebGLProgram = gl.createProgram() as WebGLProgram;
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        // If creating the shader program failed, alert
+        if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)){
+            alert("Unable to initialize the shader program: " + gl.getProgramInfoLog(shaderProgram));
+            return null as unknown as WebGLProgram;
+        }
+
+        return shaderProgram;
+    }
+
+    //
+    // creates a shader of the given type, uploads the source and
+    // compiles it.
+    //
+    #loadShader(gl: WebGLRenderingContext, type: number, source: string): WebGLShader {
+        const shader: WebGLShader = gl.createShader(type) as WebGLShader;
+
+        // Send the source to the shader object
+        gl.shaderSource(shader, source);
+
+        // Compile the shader program
+        gl.compileShader(shader);
+
+        // See if it compiled successfully
+        if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+            alert("An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader));
+            gl.deleteShader(shader);
+            return null as unknown as WebGLShader;
+        }
+
+        return shader;
     }
 }
