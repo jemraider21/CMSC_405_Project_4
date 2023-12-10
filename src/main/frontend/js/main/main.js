@@ -1,4 +1,4 @@
-import { ShapePositionEnum } from "../models/shapes/positions/ShapePositions.js";
+import { getRandomShapePositions } from "../models/shapes/positions/ShapePositions.js";
 import { ProgramInfo } from "../models/structures/programinfo/ProgramInfo.js";
 import { initBuffers } from "../utils/initbuffers/InitBuffers.js";
 import { drawScene } from "../utils/drawscene/DrawScene.js";
@@ -22,9 +22,8 @@ function main() {
     const programInfo = new ProgramInfo(gl);
     // Here's where we call the routine that builds all the
     // objects we'll be drawing.
-    const shapeContexts = Object.values(ShapePositionEnum).map((shapePosition) => {
-        return new ShapeContext(initBuffers(gl, shapePosition.position), getRandomTranslationVertex());
-    });
+    const shapeContexts = getRandomShapePositions(10)
+        .map((shapePosition) => new ShapeContext(initBuffers(gl, shapePosition.position), getRandomTranslationVertex()));
     // Draw the scene repeatedly
     let then = 0;
     function render(now) {

@@ -41,7 +41,7 @@ function drawShape(gl: WebGLRenderingContext, programInfo: ProgramInfo, modelVie
     mat4.translate(
         modelViewMatrix, // destination matrix
         modelViewMatrix, // matrix to translate
-        shapeContext.vertex.vertex
+        shapeContext.translationVertex.vertex
     ); // amount to translate
     
     mat4.rotate(

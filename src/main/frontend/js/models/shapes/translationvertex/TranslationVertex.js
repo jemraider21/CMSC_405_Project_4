@@ -9,7 +9,4 @@ const TranslationVertexEnum = {
     BOTTOM_LEFT: new TranslationVertex(-0.5, -0.5),
     BOTTOM_RIGHT: new TranslationVertex(0.5, -0.5),
 };
-export function getRandomTranslationVertex() {
-    const values = Object.values(TranslationVertexEnum);
-    return values[Math.floor(Math.random() * values.length)];
-}
+export const getRandomTranslationVertex = () => Object.values(TranslationVertexEnum)[Math.floor(Math.random() * Object.values(TranslationVertexEnum).length)];

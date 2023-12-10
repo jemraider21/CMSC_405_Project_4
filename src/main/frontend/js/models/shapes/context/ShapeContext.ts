@@ -3,10 +3,10 @@ import { TranslationVertex } from "../translationvertex/TranslationVertex.js";
 
 export class ShapeContext{
     buffers: BufferContainer;
-    vertex: TranslationVertex;
+    translationVertex: TranslationVertex;
 
     constructor(buffers: BufferContainer, vertex: TranslationVertex){
         this.buffers = buffers;
-        this.vertex = vertex;
+        this.translationVertex = vertex;
     }
 }

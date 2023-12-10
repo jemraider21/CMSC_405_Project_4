@@ -1,4 +1,4 @@
-import { ShapePositionEnum, ShapePositions } from "../models/shapes/positions/ShapePositions.js";
+import { ShapePosition, getRandomShapePositions } from "../models/shapes/positions/ShapePositions.js";
 import { ProgramInfo } from "../models/structures/programinfo/ProgramInfo.js";
 import { initBuffers } from "../utils/initbuffers/InitBuffers.js";
 import { drawScene } from "../utils/drawscene/DrawScene.js";
@@ -24,31 +24,29 @@ function main(){
     gl.clearDepth(gl.COLOR_BUFFER_BIT); // Clear the color buffer with specified clear color
 
 
-  // Initialize a shader program; this is where all the lighting
-  // for the vertices and so forth is established.
-  const programInfo: ProgramInfo = new ProgramInfo(gl);
+    // Initialize a shader program; this is where all the lighting
+    // for the vertices and so forth is established.
+    const programInfo: ProgramInfo = new ProgramInfo(gl);
 
-  // Here's where we call the routine that builds all the
-  // objects we'll be drawing.
+    // Here's where we call the routine that builds all the
+    // objects we'll be drawing.
 
-    const shapeContexts: ShapeContext[] = Object.values(ShapePositionEnum).map((shapePosition: ShapePositions) => {
-        return new ShapeContext(initBuffers(gl, shapePosition.position), getRandomTranslationVertex());
-    });
+    const shapeContexts: ShapeContext[] = getRandomShapePositions(10)
+     .map((shapePosition: ShapePosition) => new ShapeContext(
+        initBuffers(gl, shapePosition.position), 
+        getRandomTranslationVertex()));
 
-  // Draw the scene repeatedly
-  let then: number = 0;
-  function render(now: number){
-      now *= 0.001; // convert to seconds
-      deltaTime = now - then;
-      then = now;
+    // Draw the scene repeatedly
+    let then: number = 0;
+    function render(now: number){
+        now *= 0.001; // convert to seconds
+        deltaTime = now - then;
+        then = now;
 
-      drawScene(gl, programInfo, shapeContexts, cubeRotation);
-      cubeRotation -= deltaTime;
+        drawScene(gl, programInfo, shapeContexts, cubeRotation);
+        cubeRotation -= deltaTime;
 
-      requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
 }
-
-
-

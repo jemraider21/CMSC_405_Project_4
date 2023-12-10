@@ -30,7 +30,7 @@ function drawShape(gl, programInfo, modelViewMatrix, projectionMatrix, shapeCont
     // start drawing the square.
     mat4.translate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to translate
-    shapeContext.vertex.vertex); // amount to translate
+    shapeContext.translationVertex.vertex); // amount to translate
     mat4.rotate(modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     cubeRotation * 0.75, // amount to rotate in radians
